@@ -37,6 +37,9 @@ int main() {
     printf("Your numbers were: %d and %d respectively.\n",n1,n2);
     printf("In binary, that makes %ld and %ld\n",bitwise1,bitwise2);
     printf("Their bitwise AND: %ld. As a decimal that is: %d\n",bit_and,to_decimal(bit_and));
+    printf("Their bitwise OR: %ld. As a decimal that is: %d\n",bit_or,to_decimal(bit_or));
+    printf("Their bitwise XOR: %ld. As a decimal that is: %d\n",bit_xor,to_decimal(bit_xor));
+}
 
 int to_binary(int n) {
 
@@ -84,7 +87,7 @@ int logical_and(int b1, int b2) {
         r1 = larger % 10, r2 = smaller % 10;
         // Convert to boolean type
         p1 = r1, p2 = r2;
-        dec_val = (p1 && p2);
+        dec_val = (p1 & p2); // Logic AND
         // Add biwise value of decimal to total
         total += dec_val * pow(10,decimal_step);
         // Reduce numbers and increase decimal step
@@ -96,9 +99,57 @@ int logical_and(int b1, int b2) {
 }
 
 int logical_or(int b1, int b2) {
-    return 1;
+    int larger = b1, smaller = b2;
+    if (larger < smaller) {
+        larger = b2, smaller = b1;
+    }
+
+    int decimal_step = 0; // Current step in the decimal
+    int r1, r2; // Remainder of both binaries
+    bool p1, p2; // Boolean translations of remainders
+    int dec_val; // Propositional integer value of p1 and p2
+    long int total = 0;
+
+    while (larger > 0) {
+        // Find decimal place
+        r1 = larger % 10, r2 = smaller % 10;
+        // Convert to boolean type
+        p1 = r1, p2 = r2;
+        dec_val = (p1 | p2); // Logic OR
+        // Add biwise value of decimal to total
+        total += dec_val * pow(10,decimal_step);
+        // Reduce numbers and increase decimal step
+        larger /= 10, smaller /= 10;
+        decimal_step++;
+    }
+
+    return total;
 }
 
 int logical_xor(int b1, int b2) {
-    return 1;
+    int larger = b1, smaller = b2;
+    if (larger < smaller) {
+        larger = b2, smaller = b1;
+    }
+
+    int decimal_step = 0; // Current step in the decimal
+    int r1, r2; // Remainder of both binaries
+    bool p1, p2; // Boolean translations of remainders
+    int dec_val; // Propositional integer value of p1 and p2
+    long int total = 0;
+
+    while (larger > 0) {
+        // Find decimal place
+        r1 = larger % 10, r2 = smaller % 10;
+        // Convert to boolean type
+        p1 = r1, p2 = r2;
+        dec_val = (p1 ^ p2); // Logic XOR
+        // Add biwise value of decimal to total
+        total += dec_val * pow(10,decimal_step);
+        // Reduce numbers and increase decimal step
+        larger /= 10, smaller /= 10;
+        decimal_step++;
+    }
+
+    return total;
 }
