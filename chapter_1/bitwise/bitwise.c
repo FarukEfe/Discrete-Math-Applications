@@ -59,11 +59,10 @@ int to_decimal(int binary) {
     int total = 0;
     int step_tenth, rem;
 
-    while (pow(10,decimal_step) < binary) {
-        step_tenth = pow(10,decimal_step);
-        rem = binary % step_tenth;
-        total += pow(2,decimal_step) * rem;
-        binary -= step_tenth;
+    while (binary > 0) {
+        rem = binary % 10;
+        total += rem * pow(2,decimal_step);
+        binary /= 10; 
         decimal_step++;
     }
     return total;
