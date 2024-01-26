@@ -4,6 +4,7 @@
 #include <string.h> 
 
 int to_binary();
+int to_decimal();
 
 int main() {
 
@@ -24,8 +25,19 @@ int main() {
     printf("%ld\n",bitwise1);
     printf("%ld\n",bitwise2);
     // Get bitwise and/or/xor values
+    /*
+    long int bit_and;
+    long int bit_or;
+    long int bit_xor;
 
+    long int decimal_step = 0;
+
+    while (pow(10,decimal_step) < bitwise1) {
+
+    }*/
     // Turn them back in numbers
+    printf("%d\n",to_decimal(bitwise1));
+    printf("%d\n",to_decimal(bitwise2));
 }
 
 int to_binary(int n) {
@@ -40,4 +52,19 @@ int to_binary(int n) {
     }
 
     return binary_num;
+}
+
+int to_decimal(int binary) {
+    long int decimal_step = 0;
+    int total = 0;
+    int step_tenth, rem;
+
+    while (pow(10,decimal_step) < binary) {
+        step_tenth = pow(10,decimal_step);
+        rem = binary % step_tenth;
+        total += pow(2,decimal_step) * rem;
+        binary -= step_tenth;
+        decimal_step++;
+    }
+    return total;
 }
