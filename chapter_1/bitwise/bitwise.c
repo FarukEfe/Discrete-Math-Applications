@@ -27,19 +27,16 @@ int main() {
     // Turn input numbers into base-2
     bitwise1 = to_binary(n1);
     bitwise2 = to_binary(n2);
-    printf("%ld\n",bitwise1);
-    printf("%ld\n",bitwise2);
     // Get bitwise and/or/xor values
     
     long int bit_and = logical_and(bitwise1,bitwise2);
-    long int bit_or = 0;
-    long int bit_xor = 0;
+    long int bit_or = logical_or(bitwise1,bitwise2);
+    long int bit_xor = logical_xor(bitwise1,bitwise2);
 
-    printf("%ld\n",bit_and);
-    // Turn them back in numbers
-    printf("%d\n",to_decimal(bitwise1));
-    printf("%d\n",to_decimal(bitwise2));
-}
+    // Turn them back in numbers & final display
+    printf("Your numbers were: %d and %d respectively.\n",n1,n2);
+    printf("In binary, that makes %ld and %ld\n",bitwise1,bitwise2);
+    printf("Their bitwise AND: %ld. As a decimal that is: %d\n",bit_and,to_decimal(bit_and));
 
 int to_binary(int n) {
 
@@ -73,7 +70,7 @@ int logical_and(int b1, int b2) {
 
     int larger = b1, smaller = b2;
     if (larger < smaller) {
-        larger, smaller = smaller, larger;
+        larger = b2, smaller = b1;
     }
 
     int decimal_step = 0; // Current step in the decimal
@@ -82,27 +79,26 @@ int logical_and(int b1, int b2) {
     int dec_val; // Propositional integer value of p1 and p2
     long int total = 0;
 
-    printf("Large: %d Small: %d\n",larger,smaller);
     while (larger > 0) {
         // Find decimal place
-        r1, r2 = larger % 10, smaller % 10;
+        r1 = larger % 10, r2 = smaller % 10;
         // Convert to boolean type
-        p1, p2 = r1, r2;
+        p1 = r1, p2 = r2;
         dec_val = (p1 && p2);
-        printf("Current Decimal Value for %d and %d: %d\n",p1,p2,dec_val);
+        // Add biwise value of decimal to total
         total += dec_val * pow(10,decimal_step);
-        //larger -= r1,smaller -= r2;
+        // Reduce numbers and increase decimal step
         larger /= 10, smaller /= 10;
-        printf("Large: %d Small: %d\n",larger,smaller);
         decimal_step++;
     }
+
     return total;
 }
 
 int logical_or(int b1, int b2) {
-
+    return 1;
 }
 
 int logical_xor(int b1, int b2) {
-
+    return 1;
 }
