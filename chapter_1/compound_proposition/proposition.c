@@ -5,7 +5,7 @@
 int main()
 {   
     // Script
-    char* logic;
+    char logic[100];
     // Booleans
     bool p;
     bool q;
@@ -14,14 +14,14 @@ int main()
     int temp2;
 
     // Get boolean input
-    printf("Enter 0(True) or 1(False) for p: ");
+    printf("Enter 0(False) or 1(True) for p: ");
     scanf("%d", &temp1);
-    printf("\nEnter 0(True) or 1(False) for q: ");
+    printf("\nEnter 0(False) or 1(True) for q: ");
     scanf("%d", &temp2);
 
     // Get script and turn to prolog
     printf("Enter your logic script using 'T' 'F' 'p' 'q' 'and' 'or' 'xor' 'if' 'then' 'not'.\n");
-    printf("Make sure to bracket according to priority of operation:\n");
-    scanf("%s", logic);
+    printf("Make sure to bracket according to priority of operation (no larger than 100 characters):\n");
+    scanf(" %[^\n]", logic);
 
 }
